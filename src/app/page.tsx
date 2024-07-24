@@ -1,49 +1,62 @@
 import Image from "next/image";
-import TopButton from '../components/TopButton';
+import SunnyButton from "../components/SunnyButton";
+import RainbowButton from "../components/RainbowButton";
 
 export default function Home() {
   return (
-    <main className="flex min-h-screen flex-col items-center justify-between p-4">
+    <main className="flex min-h-screen flex-col items-center justify-between">
+      <div className="flex flex-row w-screen mb-4 p-1">
 
-      <div className="flex mb-[10px] items-center justify-center">
+        <div className="basis-1/3">
+          {/* empty */}
+        </div>
+
         <a
-          className="flex items-center place-items-center pointer-events-none lg:pointer-events-auto"
+          className="basis-1/3 my-2 pointer-events-none lg:pointer-events-auto"
           target="_blank"
           rel="noopener noreferrer"
         >
           <Image
             src="/WeRaGlobal.svg"
             alt="WeRa Global"
-            className="dark"
+            className="dark mx-auto"
             width={160}
             height={60}
             priority
           />
         </a>
+
+        <div className="basis-1/3 pt-4">
+          <div className="ml-auto pr-16 w-min">
+            <RainbowButton />
+          </div>
+        </div>
       </div>
+
+      {/* <div className="w-3/6 border-t-2 border-[#fdfd96]/60 py-2"/> */}
 
       <div className="w-full pb-[15px] max-w-4xl items-center justify-between font-mono text-sm lg:flex">
 
         <div className="pb-1">
-          <TopButton href="#" title="Button">
-            Button 1
-          </TopButton>
+          <SunnyButton href="#" title="Button">
+            ???
+          </SunnyButton>
         </div>
 
-        <TopButton href="#" title="Button">
-          Button 2
-        </TopButton>
+        <SunnyButton href="#" title="Button">
+            Invest
+        </SunnyButton>
 
         <div className="w-0" />
 
-        <TopButton href="#" title="Button">
-          Button 3
-        </TopButton>
+        <SunnyButton href="#" title="Button">
+          Stake
+        </SunnyButton>
 
         <div className="pb-1">
-          <TopButton href="#" title="Button">
-            Button 4
-          </TopButton>
+          <SunnyButton href="#" title="Button">
+            Faucet
+          </SunnyButton>
         </div>
 
       </div>
@@ -64,7 +77,7 @@ export default function Home() {
       <div className="mb-32 grid text-center lg:mb-0 lg:w-1/3 lg:max-w-5xl lg:grid-cols-2 lg:text-center">
         <a
           href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className="group rounded-lg border border-transparent px-5 py-4 transition-colors hover:border-gray-300 hover:bg-gray-100 hover:dark:border-neutral-700 hover:dark:bg-neutral-800/30"
+          className="group rounded-lg border border-transparent px-5 py-2 pr-20 transition-colors hover:border-gray-300 hover:bg-gray-100 hover:dark:border-neutral-700 hover:dark:bg-neutral-800/30"
           target="_blank"
           rel="noopener noreferrer"
         >
@@ -81,7 +94,7 @@ export default function Home() {
 
         <a
           href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          className="group rounded-lg border border-transparent px-5 py-4 transition-colors hover:border-gray-300 hover:bg-gray-100 hover:dark:border-neutral-700 hover:dark:bg-neutral-800/30"
+          className="group rounded-lg border border-transparent px-5 py-2 pr-20 transition-colors hover:border-gray-300 hover:bg-gray-100 hover:dark:border-neutral-700 hover:dark:bg-neutral-800/30"
           target="_blank"
           rel="noopener noreferrer"
         >

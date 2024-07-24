@@ -1,13 +1,19 @@
-import Link from 'next/link';
-import React, { FC } from 'react';
+import Link from "next/link";
+import React, { FC } from "react";
 
-interface TopButtonProps {
+interface SunnyButtonProps {
   href?: string;
   title?: string;
+  className?: string;
   children: React.ReactNode;
 }
 
-const TopButton: FC<TopButtonProps> = ({ href = "#", title = "Button", children }) => {
+const SunnyButton: FC<SunnyButtonProps> = ({
+  href = "#",
+  title = "Button",
+  className = "min-w-36 px-4 py-2",
+  children,
+}) => {
   return (
     <div className="relative inline-flex group">
       <div className="
@@ -19,11 +25,12 @@ const TopButton: FC<TopButtonProps> = ({ href = "#", title = "Button", children 
       </div>
       <Link href={href} legacyBehavior>
         <a title={title}
-          className="
-            relative inline-flex items-center justify-center px-8 py-4
+          className={`
+            relative inline-flex items-center justify-center
             text-base font-bold text-white transition-all
             duration-200 bg-gray-900 font-pj rounded-xl
-          "
+            ${className}
+          `}
           role="button">
           {children}
         </a>
@@ -32,4 +39,4 @@ const TopButton: FC<TopButtonProps> = ({ href = "#", title = "Button", children 
   );
 };
 
-export default TopButton;
+export default SunnyButton;
