@@ -3,7 +3,7 @@ import { ConnectButton } from "@rainbow-me/rainbowkit";
 
 const RainbowButton = () => {
   return (
-    <SunnyButton href="#" title="Button" className="px-0 py-0">
+    <SunnyButton href="#" title="Button" className="px-1 py-0 w-max">
       <ConnectButton
         label="Connect"
         accountStatus={{

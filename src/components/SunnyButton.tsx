@@ -17,10 +17,10 @@ const SunnyButton: FC<SunnyButtonProps> = ({
   return (
     <div className="relative inline-flex group">
       <div className="
-        absolute transition-all duration-1000 opacity-70
-        bg-gradient-to-r from-[#fcffa4] via-[#fdfd96] to-[#fcffa4]
+        absolute transition-all duration-1000 opacity-60
+        bg-gradient-to-r from-sunny-200 via-sunny-300 to-sunny-200
         group-hover:opacity-100 group-hover:-inset-1 group-hover:duration-200
-        animate-tilt rounded-xl blur-md -inset-px
+        animate-tilt rounded-xl blur-[10px] -inset-px
         ">
       </div>
       <Link href={href} legacyBehavior>

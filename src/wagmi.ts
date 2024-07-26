@@ -1,4 +1,4 @@
-import { getDefaultConfig } from '@rainbow-me/rainbowkit';
+import { getDefaultConfig } from "@rainbow-me/rainbowkit";
 import {
   arbitrum,
   base,
@@ -6,18 +6,18 @@ import {
   optimism,
   polygon,
   sepolia,
-} from 'wagmi/chains';
+} from "wagmi/chains";
 
 export const config = getDefaultConfig({
-  appName: 'wera-frontend',
-  projectId: 'YOUR_PROJECT_ID', // TODO
+  appName: "wera-frontend",
+  projectId: "YOUR_PROJECT_ID", // TODO
   chains: [
     mainnet,
     polygon,
     optimism,
     arbitrum,
     base,
-    ...(process.env.NEXT_PUBLIC_ENABLE_TESTNETS === 'true' ? [sepolia] : []),
+    ...(process.env.NEXT_PUBLIC_ENABLE_TESTNETS === "true" ? [sepolia] : []),
   ],
   ssr: true,
 });
