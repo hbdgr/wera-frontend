@@ -1,6 +1,5 @@
 import { getDefaultConfig } from "@rainbow-me/rainbowkit";
 import {
-  arbitrum,
   base,
   mainnet,
   optimism,
@@ -15,7 +14,6 @@ export const config = getDefaultConfig({
     mainnet,
     polygon,
     optimism,
-    arbitrum,
     base,
     ...(process.env.NEXT_PUBLIC_ENABLE_TESTNETS === "true" ? [sepolia] : []),
   ],
