@@ -11,7 +11,7 @@ interface SunnyButtonProps {
 const SunnyButton: FC<SunnyButtonProps> = ({
   href = "#",
   title = "Button",
-  className = "min-w-36 px-4 py-2",
+  className = "min-w-36 px-2 py-2",
   children,
 }) => {
   return (
@@ -20,7 +20,7 @@ const SunnyButton: FC<SunnyButtonProps> = ({
         absolute transition-all duration-1000 opacity-60
         bg-gradient-to-r from-sunny-200 via-sunny-300 to-sunny-200
         group-hover:opacity-100 group-hover:-inset-1 group-hover:duration-200
-        animate-tilt rounded-xl blur-[10px] -inset-px
+        animate-tilt rounded-xl blur-[12px] -inset-px
         ">
       </div>
       <Link href={href} legacyBehavior>

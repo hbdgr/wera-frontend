@@ -16,7 +16,7 @@ export default function Home() {
 
       <div className="
         hidden lg:flex items-center justify-between font-mono text-sm
-        w-full pb-[20px] pt-4 max-w-4xl mb-auto
+        w-full py-2 max-w-4xl mb-auto
       ">
 
         <div className="pb-1 p-2 pt-0 lg:p-0">
@@ -48,16 +48,17 @@ export default function Home() {
       </div>
 
       <div className="
-        relative  flex grow items-center justify-center
-        w-11/12 m-2 lg:w-10/12 lg:m-20 xl:w-8/12
+        relative flex grow items-center justify-center
+        w-11/12 lg:w-9/12 xl:w-7/12
+        m-2 lg:m-8
         shadow-inner bg-black/75 rounded-xl border border-sunny-300/60
       ">
       </div>
 
-      <div className="shadow-inner w-screen m-4 border border-sunny-300/30">
+      <div className="shadow-inner w-screen m-2 border border-sunny-300/30">
       </div>
 
-      <div className="grid text-left pl-2 mb-2 mr-auto lg:mr-0 lg:mb-0 lg:w-1/2 lg:max-w-5xl lg:grid-cols-2 lg:text-center">
+      <div className="grid text-left pl-2 mb-2 pb-1 mr-auto lg:mr-0 lg:mb-0 lg:w-1/2 lg:max-w-5xl lg:grid-cols-2 lg:text-center">
         <a
           href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
           className="group rounded-lg border border-transparent px-5 py-2 pr-20 transition-colors hover:border-gray-300 hover:bg-gray-100 hover:dark:border-neutral-700 hover:dark:bg-neutral-800/30"
