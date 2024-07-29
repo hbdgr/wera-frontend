@@ -14,48 +14,49 @@ export default function Home() {
 
       <Header />
 
-      <div className="
-        hidden lg:flex items-center justify-between font-mono text-sm
-        w-full py-2 max-w-4xl mb-auto
-      ">
+      <div className="relative flex flex-col grow items-center justify-between w-full max-w-6xl">
 
-        <div className="pb-1 p-2 pt-0 lg:p-0">
-          <SunnyButton href="#" title="Button">
-            ???
-          </SunnyButton>
+        <div className="
+          hidden lg:flex items-center justify-between font-mono text-sm
+          w-full py-2 max-w-4xl mb-auto mx-auto
+        ">
+          <div className="pb-1 p-2 pt-0 lg:p-0">
+            <SunnyButton href="#" title="Button">
+              ???
+            </SunnyButton>
+          </div>
+
+          <div className="p-2 lg:p-0">
+            <SunnyButton href="#" title="Button">
+                Invest
+            </SunnyButton>
+          </div>
+
+          <div className="w-0" />
+
+          <div className="p-2 lg:p-0">
+            <SunnyButton href="#" title="Button">
+              Stake
+            </SunnyButton>
+          </div>
+
+          <div className="pb-1 p-2 lg:p-0">
+            <SunnyButton href="#" title="Button">
+              Faucet
+            </SunnyButton>
+          </div>
         </div>
 
-        <div className="p-2 lg:p-0">
-          <SunnyButton href="#" title="Button">
-              Invest
-          </SunnyButton>
-        </div>
-
-        <div className="w-0" />
-
-        <div className="p-2 lg:p-0">
-          <SunnyButton href="#" title="Button">
-            Stake
-          </SunnyButton>
-        </div>
-
-        <div className="pb-1 p-2 lg:p-0">
-          <SunnyButton href="#" title="Button">
-            Faucet
-          </SunnyButton>
+        <div className="
+          relative flex grow items-center justify-center
+          w-11/12 m-2 lg:m-8
+          shadow-inner bg-black/75 rounded-xl border border-sunny-300/60
+        ">
         </div>
 
       </div>
 
-      <div className="
-        relative flex grow items-center justify-center
-        w-11/12 lg:w-9/12 xl:w-7/12
-        m-2 lg:m-8
-        shadow-inner bg-black/75 rounded-xl border border-sunny-300/60
-      ">
-      </div>
-
-      <div className="shadow-inner w-screen m-2 border border-sunny-300/30">
+      <div className="shadow-inner w-screen min-h-0 m-2 border border-sunny-300/30">
       </div>
 
       <div className="grid text-left pl-2 mb-2 pb-1 mr-auto lg:mr-0 lg:mb-0 lg:w-1/2 lg:max-w-5xl lg:grid-cols-2 lg:text-center">
