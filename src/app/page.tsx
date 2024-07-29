@@ -5,12 +5,18 @@ import Header from "./header";
 
 export default function Home() {
   return (
-    <main className="flex w-full min-h-screen flex-col items-center justify-between">
+    <main className="
+      flex flex-col w-full min-h-screen items-center justify-between
+      relative bg-cover bg-center
+      "
+      style={{ backgroundImage: "url('/distantSun.png')" }}
+    >
+
       <Header />
 
       <div className="
         hidden lg:flex items-center justify-between font-mono text-sm
-        w-full pb-[20px] max-w-4xl mb-auto
+        w-full pb-[20px] pt-4 max-w-4xl mb-auto
       ">
 
         <div className="pb-1 p-2 pt-0 lg:p-0">
@@ -42,19 +48,13 @@ export default function Home() {
       </div>
 
       <div className="
-        relative flex items-center justify-center
-        w-screen lg:w-[1024px] xl:w-[1200px] h-[640px] xl:h-[750px] px-3 lg:px-32 py-10 my-auto
+        relative  flex grow items-center justify-center
+        w-11/12 m-2 lg:w-10/12 lg:m-20 xl:w-8/12
+        shadow-inner bg-black/75 rounded-xl border border-sunny-300/60
       ">
-        <div className="absolute inset-0 bg-cover bg-center" style={{ backgroundImage: "url('/distantSun.png')" }}></div>
+      </div>
 
-        <div className="
-          relative text-center w-full h-full
-          shadow-inner bg-black/75
-          rounded-xl border border-sunny-300/60"
-        >
-          <h1 className="text-2xl font-bold"></h1>
-        </div>
-
+      <div className="shadow-inner w-screen m-4 border border-sunny-300/30">
       </div>
 
       <div className="grid text-left pl-2 mb-2 mr-auto lg:mr-0 lg:mb-0 lg:w-1/2 lg:max-w-5xl lg:grid-cols-2 lg:text-center">
