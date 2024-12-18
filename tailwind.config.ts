@@ -14,6 +14,10 @@ const config: Config = {
           "conic-gradient(from 180deg at 50% 50%, var(--tw-gradient-stops))",
       },
       colors: {
+        "wera": {
+          "yellow": "#f2b035",
+          "dark": "#212529",
+        },
         "sunny": {
           100: "#ffffe0",  // Very light yellow
           200: "#fdfd96",  // Light yellow

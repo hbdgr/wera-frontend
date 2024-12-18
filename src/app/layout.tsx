@@ -8,7 +8,7 @@ import { Providers } from "./providers";
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
-  title: "App | WeRa Global",
+  title: "DApp | Solar Network State",
   description: "Self-Sovereign Citizens",
 };
 

@@ -1,17 +1,14 @@
-import SunnyButton from "./SunnyButton";
 import { ConnectButton } from "@rainbow-me/rainbowkit";
 
 const RainbowButton = () => {
   return (
-    <SunnyButton href="#" title="Button" className="px-1 py-1 mt-1 w-max">
-      <ConnectButton
-        label="Connect"
-        accountStatus={{
-          smallScreen: "avatar",
-          largeScreen: "full",
-        }}
-      />
-    </SunnyButton>
+    <ConnectButton
+      label="Connect Wallet"
+      accountStatus={{
+        smallScreen: "avatar",
+        largeScreen: "full",
+      }}
+    />
   );
 };
 

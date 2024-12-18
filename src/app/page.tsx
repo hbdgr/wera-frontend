@@ -1,100 +1,35 @@
-import Image from "next/image";
-import SunnyButton from "../components/SunnyButton";
-
 import Header from "./header";
 
 export default function Home() {
+
   return (
     <main className="
       flex flex-col w-full min-h-screen items-center justify-between
       relative bg-cover bg-center
       "
-      style={{ backgroundImage: "url('/distantSun.png')" }}
     >
 
-      <Header />
+      <div className="
+        relative flex flex-col items-center justify-between
+        w-full lg:w-2/3 h-screen m-auto mb-96
+        shadow-inner bg-transparent border border-wera-yellow
+      ">
+        <Header />
 
-      <div className="relative flex flex-col grow items-center justify-between w-full max-w-6xl">
-
-        <div className="
-          hidden lg:flex items-center justify-between font-mono text-sm
-          w-full py-2 max-w-4xl mb-auto mx-auto
+        <button className="
+          px-6 py-3 font-semibold text-xl
+          lg:text-2xl
+          shadow-lg rounded-full border
+          mx-auto my-auto mt-44
+          bg-transparent text-wera-yellow border-wera-yellow
+          hover:text-wera-dark hover:bg-wera-yellow hover:border-wera-yellow
+          active:text-wera-dark active:bg-wera-yellow active:border-wera-yellow
         ">
-          <div className="pb-1 p-2 pt-0 lg:p-0">
-            <SunnyButton href="#" title="Button">
-              ???
-            </SunnyButton>
-          </div>
-
-          <div className="p-2 lg:p-0">
-            <SunnyButton href="#" title="Button">
-                Invest
-            </SunnyButton>
-          </div>
-
-          <div className="w-0" />
-
-          <div className="p-2 lg:p-0">
-            <SunnyButton href="#" title="Button">
-              Stake
-            </SunnyButton>
-          </div>
-
-          <div className="pb-1 p-2 lg:p-0">
-            <SunnyButton href="#" title="Button">
-              Faucet
-            </SunnyButton>
-          </div>
-        </div>
-
-        <div className="
-          relative flex grow items-center justify-center
-          w-11/12 m-2 lg:m-8
-          shadow-inner bg-black/75 rounded-xl border border-sunny-300/60
-        ">
-        </div>
+          Become Solar Resident
+        </button>
 
       </div>
 
-      <div className="shadow-inner w-screen min-h-0 m-2 border border-sunny-300/30">
-      </div>
-
-      <div className="grid text-left pl-2 mb-2 pb-1 mr-auto lg:mr-0 lg:mb-0 lg:w-1/2 lg:max-w-5xl lg:grid-cols-2 lg:text-center">
-        <a
-          href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className="group rounded-lg border border-transparent px-5 py-2 pr-20 transition-colors hover:border-gray-300 hover:bg-gray-100 hover:dark:border-neutral-700 hover:dark:bg-neutral-800/30"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2 className="mb-3 text-2xl font-semibold">
-            Docs{" "}
-            <span className="inline-block transition-transform group-hover:translate-x-1 motion-reduce:transform-none">
-              -&gt;
-            </span>
-          </h2>
-          <p className="m-0 text-sm opacity-50">
-            Find in-depth information about <br/> WeRa Global.
-          </p>
-        </a>
-
-        <a
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          className="group rounded-lg border border-transparent px-5 py-2 pr-20 transition-colors hover:border-gray-300 hover:bg-gray-100 hover:dark:border-neutral-700 hover:dark:bg-neutral-800/30"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2 className="mb-3 text-2xl font-semibold">
-            Learn{" "}
-            <span className="inline-block transition-transform group-hover:translate-x-1 motion-reduce:transform-none">
-              -&gt;
-            </span>
-          </h2>
-          <p className="m-0 text-sm opacity-50">
-            Learn more about WeRa Global.
-          </p>
-        </a>
-
-      </div>
     </main>
   );
 }
