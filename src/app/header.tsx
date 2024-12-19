@@ -16,7 +16,7 @@ const menuItems: MenuItem[] = [
 export default function Header() {
   return (
     <header className="
-      flex flex-row w-full mb-4 p-4
+      flex flex-row w-full p-4
     ">
 
       <div className="basis-1/3 hidden lg:flex">
@@ -51,6 +51,7 @@ export default function Header() {
           <RainbowButton />
         </div>
       </div>
+
     </header>
   );
 }

@@ -15,6 +15,7 @@ const config: Config = {
       },
       colors: {
         "wera": {
+          "bg": "#fdf0d8",
           "yellow": "#f2b035",
           "dark": "#212529",
         },
