@@ -36,9 +36,9 @@ export default function Header() {
         <Image
           src="/WeRaGlobal.svg"
           alt="WeRa Global"
-          className="dark mr-auto my-auto lg:mx-auto"
-          width={160}
-          height={60}
+          className="dark w-full h-10 mr-auto my-auto lg:mx-auto"
+          width={0}
+          height={0}
           priority
         />
       </a>

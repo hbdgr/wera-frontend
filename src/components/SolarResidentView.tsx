@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import NFTMintModal from "./NFTMintModal";
 import { PublicClient } from "viem";
 
-const SolarResidentButton: React.FC<{ walletClient: PublicClient; account: `0x${string}` }> = ({
+const SolarResidentView: React.FC<{ walletClient: PublicClient; account: `0x${string}` }> = ({
   walletClient,
   account,
 }) => {
@@ -44,4 +44,4 @@ const SolarResidentButton: React.FC<{ walletClient: PublicClient; account: `0x${
   );
 };
 
-export default SolarResidentButton;
+export default SolarResidentView;

@@ -21,36 +21,54 @@ const Modal: React.FC<ModalProps> = ({ isOpen, onClose, walletClient, account })
 
   const nftMinter: web3.NFTMinter = web3.getNftMinter(walletClient);
 
+  // ----- Wait for Transactions -----
+  const [isWaitingForConfirmation, setIsWaitingForConfirmation] = useState(false);
+
+  const waitForTransaction = async (hash: web3.SolidityBytes) => {
+    setIsWaitingForConfirmation(true); // Show "waiting for confirmation"
+    const receipt = await walletClient.waitForTransactionReceipt({ hash });
+    setIsWaitingForConfirmation(false); // Hide "waiting for confirmation"
+
+
+    if (receipt.status === "success") {
+      console.log("Transaction confirmed");
+      await updateWethAllowance(weth!);
+    } else {
+      console.log("Transaction failed");
+    }
+  };
+
   // ----- Update Functions -----
 
-  const updateWethAddress = useCallback(async () => {
-    const weth = await web3.getWETHAddress(nftMinter);
-    setWethAddress((weth));
-  }, [nftMinter, setWethAddress]);
-
-  const updateNftPrice = useCallback(async () => {
-    const price = await web3.getNftPrice(nftMinter);
-    setNftPrice(price);
-  }, [nftMinter, setNftPrice]);
-
-  const updateWethAllowance = useCallback(async () => {
-    if (!weth) return;
-
+  const updateWethAllowance = useCallback(async (weth: web3.IERC20) => {
     const allowance = await web3.getWETHAllowance(weth, account, nftMinter.address);
     setWethAllowance(allowance);
-  }, [weth, nftMinter, account]);
+    console.log("WETH Allowance: ", allowance);
+  }, [setWethAllowance]);
+
+  const updateNftPrice = useCallback(async () => {
+    setNftPrice(await web3.getNftPrice(nftMinter));
+  }, [nftMinter, setNftPrice]);
 
   useEffect(() => {
-    updateWethAddress();
+    if (weth) return;
 
-    const weth = web3.getWETH(walletClient, wethAddress);
-    setWeth(weth);
-    updateWethAllowance();
+    const fetchWeth = async () => {
+      const address = await web3.getWETHAddress(nftMinter);
+      setWethAddress(address);
 
+      const wethInstance = web3.getWETH(walletClient, address);
+      setWeth(wethInstance);
+
+      await updateWethAllowance(wethInstance);
+    };
+
+    fetchWeth();
+  }, [weth, nftMinter, walletClient, updateWethAllowance]);
+
+  useEffect(() => {
     updateNftPrice();
-
-    return () => {};
-  }, [walletClient, updateWethAddress, updateNftPrice]);
+  }, [updateNftPrice]);
 
   // ----- Mint Functions -----
 
@@ -62,11 +80,13 @@ const Modal: React.FC<ModalProps> = ({ isOpen, onClose, walletClient, account })
     return wethAllowance >= nftPrice;
   };
 
-  const onApprove = () => {
-    // Approve logic
+  const onApprove = async () => {
+    const hash = await web3.approveWETH(weth!, nftMinter.address, nftPrice);
+    await waitForTransaction(hash);
   };
-  const onMint = () => {
-    // Mint logic
+  const onMint = async () => {
+    const hash = await web3.purchaseNFT(nftMinter);
+    await waitForTransaction(hash);
   };
 
   // ----- UI -----
@@ -118,21 +138,21 @@ const Modal: React.FC<ModalProps> = ({ isOpen, onClose, walletClient, account })
         <div className="mt-6 flex flex-col items-center space-y-4">
           <button
             onClick={onApprove}
-            disabled={!canApprove} // Replace 'canApprove' with your logic
-            className={`px-4 py-2 rounded-lg ${
-              canApprove()
-                ? "bg-blue-500 text-white"
-                : "bg-gray-400 text-gray-200 cursor-not-allowed"
+            disabled={!canApprove}
+              className={`px-4 py-2 rounded-lg transition duration-150 ${
+                canApprove()
+                  ? "bg-blue-500 text-white active:bg-blue-700"
+                  : "bg-gray-400 text-gray-200 cursor-not-allowed"
             }`}
           >
             Approve WETH
           </button>
           <button
             onClick={onMint}
-            disabled={!canMint} // Replace 'canMint' with your logic
-            className={`px-4 py-2 rounded-lg ${
+            disabled={!canMint}
+            className={`px-4 py-2 rounded-lg transition duration-150 ${
               canMint()
-                ? "bg-green-500 text-white"
+                ? "bg-green-500 text-white active:bg-green-700"
                 : "bg-gray-400 text-gray-200 cursor-not-allowed"
             }`}
           >
@@ -145,6 +165,12 @@ const Modal: React.FC<ModalProps> = ({ isOpen, onClose, walletClient, account })
           >
             <FaTimes size={20} />
           </button>
+
+          {isWaitingForConfirmation && (
+            <div className="mt-4 text-gray-500 text-sm italic">
+              Waiting for confirmation...
+            </div>
+          )}
         </div>
       </div>
     </div>

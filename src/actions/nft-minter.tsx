@@ -39,8 +39,18 @@ export const getWETHAddress = async (
 
 export const purchaseNFT = async (
   nftMinter: NFTMinter,
-)  => {
-  nftMinter.write.purchaseNFT();
+): Promise<SolidityBytes> => {
+  const hash = await nftMinter.write.purchaseNft();
+
+  console.log("purchase NFT: ", hash);
+  return hash;
+}
+
+export const isWhitelisted = async (
+  nftMinter: NFTMinter,
+  account: Address,
+): Promise<boolean> => {
+  return nftMinter.read.whitelist([account]) as Promise<boolean>;
 }
 
 // -- Get WETH --
@@ -48,7 +58,7 @@ export const purchaseNFT = async (
 export const getWETH = (
   walletClient: PublicClient,
   wethAddress: Address,
-) => getContract({
+): IERC20 => getContract({
   address: wethAddress,
   abi: IERC20Art.abi,
   client: walletClient,
@@ -74,5 +84,8 @@ export const approveWETH = async (
   spender: Address,
   amount: bigint,
 ): Promise<SolidityBytes> => {
-  return weth.write.approve([spender, amount]) as Promise<SolidityBytes>;
+  const hash = await weth.write.approve([spender, amount]);
+
+  console.log("approve WETH: ", hash);
+  return hash;
 }

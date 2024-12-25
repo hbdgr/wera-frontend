@@ -8,10 +8,9 @@ import {
 export const config = getDefaultConfig({
   appName: "wera-frontend",
   projectId: 'YOUR_PROJECT_ID',
-  chains: [
-    polygon,
-    ...(process.env.NEXT_PUBLIC_ENABLE_TESTNETS === "true" ? [polygonAmoy] : []),
-  ],
+  chains: (
+      process.env.NEXT_PUBLIC_ENABLE_TESTNETS === "true" ? [polygonAmoy] : [polygon]
+  ),
   transports: {
     [polygon.id]: http(),
     [polygonAmoy.id]: http()

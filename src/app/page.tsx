@@ -5,7 +5,7 @@ import { useAccount } from "wagmi";
 import { createWalletClient, custom, publicActions, PublicClient } from "viem";
 
 import Header from "./header";
-import SolarResidentButton from "../components/SolarResidentButton";
+import SolarResidentView from "../components/SolarResidentView";
 
 export default function Home() {
   const { isConnected, address, chain } = useAccount();
@@ -33,7 +33,7 @@ export default function Home() {
     <main className="
       flex flex-col min-h-screen items-center justify-between
       relative bg-cover bg-center
-      w-full lg:w-2/3 h-screen m-auto mb-96
+      w-full lg:w-3/4 h-screen m-auto mb-96
       shadow-inner bg-transparent border border-wera-yellow/10
       "
     >
@@ -47,13 +47,13 @@ export default function Home() {
 
       <div className="
         relative flex items-center justify-between
-        w-full lg:w-2/3 h-[500px] my-auto mt-14
+        w-full lg:w-3/4 h-[500px] my-auto mt-14
         shadow-inner bg-transparent border lg:rounded-xl border-wera-yellow/60
         b-test
       ">
 
         {isConnected && walletClient ? (
-          <SolarResidentButton walletClient={walletClient} account={account} />
+          <SolarResidentView walletClient={walletClient} account={account} />
         ) : (
           <div className="
             mx-auto my-auto
