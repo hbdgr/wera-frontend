@@ -1,8 +1,11 @@
 import { Address, PublicClient, formatEther, getContract, GetContractReturnType } from "viem";
 
-import NFTMinter from "../artifacts/NFTMinter.json";
+import NFTMinterArt from "../artifacts/NFTMinter.json";
+import IERC20Art from "../artifacts/IERC20.json";
 
 export type SolidityBytes = `0x${string}`;
+export type NFTMinter = GetContractReturnType<typeof NFTMinterArt.abi, PublicClient>;
+export type IERC20 = GetContractReturnType<typeof IERC20Art.abi, PublicClient>;
 
 // -- Utils --
 
@@ -16,20 +19,60 @@ export const formatEtherBalance = (balance: bigint): string => {
 
 // -- NFT Minter --
 
-export const getNftMinter = (walletClient: PublicClient) => getContract({
+export const getNftMinter = (walletClient: PublicClient): NFTMinter => getContract({
   address: process.env.NEXT_PUBLIC_NFT_MINTER_ADDRESS as Address,
-  abi: NFTMinter.abi,
+  abi: NFTMinterArt.abi,
   client: walletClient,
 });
 
 export const getNftPrice = async (
-  nftMinter: GetContractReturnType<typeof NFTMinter.abi, PublicClient>,
+  nftMinter: NFTMinter,
 ): Promise<bigint> => {
   return nftMinter.read.nftPrice() as Promise<bigint>;
 };
 
 export const getWETHAddress = async (
-  nftMinter: GetContractReturnType<typeof NFTMinter.abi, PublicClient>,
+  nftMinter: NFTMinter,
 ): Promise<Address> => {
   return nftMinter.read.weth() as Promise<Address>;
 };
+
+export const purchaseNFT = async (
+  nftMinter: NFTMinter,
+)  => {
+  nftMinter.write.purchaseNFT();
+}
+
+// -- Get WETH --
+
+export const getWETH = (
+  walletClient: PublicClient,
+  wethAddress: Address,
+) => getContract({
+  address: wethAddress,
+  abi: IERC20Art.abi,
+  client: walletClient,
+});
+
+export const getWETHBalance = async (
+  weth: IERC20,
+  user: Address,
+): Promise<bigint> => {
+  return weth.read.balanceOf([user]) as Promise<bigint>;
+}
+
+export const getWETHAllowance = async (
+  weth: IERC20,
+  owner: Address,
+  spender: Address,
+): Promise<bigint> => {
+  return weth.read.allowance([owner, spender]) as Promise<bigint>;
+}
+
+export const approveWETH = async (
+  weth: IERC20,
+  spender: Address,
+  amount: bigint,
+): Promise<SolidityBytes> => {
+  return weth.write.approve([spender, amount]) as Promise<SolidityBytes>;
+}

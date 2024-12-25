@@ -3,8 +3,7 @@ import { Address, PublicClient } from "viem";
 
 import { FaTimes } from "react-icons/fa";
 
-import { getNftMinter, getNftPrice, formatEtherBalance, getWETHAddress } from "../actions/nft-minter";
-
+import * as web3 from "../actions/nft-minter";
 
 interface ModalProps {
   isOpen: boolean;
@@ -14,34 +13,55 @@ interface ModalProps {
 }
 
 const Modal: React.FC<ModalProps> = ({ isOpen, onClose, walletClient, account }) => {
-  const [nftPrice, setNftPrice] = useState<string>("");
-  const [wethAddress, setWethAddress] = useState<Address>("0x");
+  const [nftPrice, setNftPrice] = useState<bigint>(0n);
 
-  const nftMinter = getNftMinter(walletClient);
+  const [weth, setWeth] = useState<web3.IERC20>();
+  const [wethAddress, setWethAddress] = useState<Address>("0x");
+  const [wethAllowance, setWethAllowance] = useState<bigint>(0n);
+
+  const nftMinter: web3.NFTMinter = web3.getNftMinter(walletClient);
 
   // ----- Update Functions -----
 
   const updateWethAddress = useCallback(async () => {
-    const weth = await getWETHAddress(nftMinter);
+    const weth = await web3.getWETHAddress(nftMinter);
     setWethAddress((weth));
   }, [nftMinter, setWethAddress]);
 
   const updateNftPrice = useCallback(async () => {
-    const price = await getNftPrice(nftMinter);
-    setNftPrice(formatEtherBalance(price));
+    const price = await web3.getNftPrice(nftMinter);
+    setNftPrice(price);
   }, [nftMinter, setNftPrice]);
+
+  const updateWethAllowance = useCallback(async () => {
+    if (!weth) return;
+
+    const allowance = await web3.getWETHAllowance(weth, account, nftMinter.address);
+    setWethAllowance(allowance);
+  }, [weth, nftMinter, account]);
 
   useEffect(() => {
     updateWethAddress();
+
+    const weth = web3.getWETH(walletClient, wethAddress);
+    setWeth(weth);
+    updateWethAllowance();
+
     updateNftPrice();
 
     return () => {};
-  }, [updateWethAddress, updateNftPrice]);
+  }, [walletClient, updateWethAddress, updateNftPrice]);
 
   // ----- Mint Functions -----
 
-  const canApprove = true;
-  const canMint = false;
+  const canApprove = () => {
+    return wethAllowance < nftPrice;
+  }
+
+  const canMint = () => {
+    return wethAllowance >= nftPrice;
+  };
+
   const onApprove = () => {
     // Approve logic
   };
@@ -85,7 +105,9 @@ const Modal: React.FC<ModalProps> = ({ isOpen, onClose, walletClient, account })
             <hr className="border-t border-gray-300" />
             <div className="flex justify-between">
               <span className="font-semibold">Price:</span>
-              <span className="text-gray-600 text-sm">{nftPrice} WETH</span>
+              <span className="text-gray-600 text-sm">
+                {web3.formatEtherBalance(nftPrice)} WETH
+              </span>
             </div>
           </div>
 
@@ -98,7 +120,7 @@ const Modal: React.FC<ModalProps> = ({ isOpen, onClose, walletClient, account })
             onClick={onApprove}
             disabled={!canApprove} // Replace 'canApprove' with your logic
             className={`px-4 py-2 rounded-lg ${
-              canApprove
+              canApprove()
                 ? "bg-blue-500 text-white"
                 : "bg-gray-400 text-gray-200 cursor-not-allowed"
             }`}
@@ -109,7 +131,7 @@ const Modal: React.FC<ModalProps> = ({ isOpen, onClose, walletClient, account })
             onClick={onMint}
             disabled={!canMint} // Replace 'canMint' with your logic
             className={`px-4 py-2 rounded-lg ${
-              canMint
+              canMint()
                 ? "bg-green-500 text-white"
                 : "bg-gray-400 text-gray-200 cursor-not-allowed"
             }`}

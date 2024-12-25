@@ -1,6 +1,8 @@
-"use client";
+"use client"
 
 import * as React from "react";
+import "@rainbow-me/rainbowkit/styles.css";
+
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { WagmiProvider } from "wagmi";
 import { RainbowKitProvider, lightTheme } from "@rainbow-me/rainbowkit";

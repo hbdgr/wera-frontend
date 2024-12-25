@@ -16,6 +16,20 @@
   }
 }
 
+@font-face {
+    font-family: 'Inter';
+    src: url('/fonts/Inter-4.1/web/Inter-Medium.woff2') format('woff2');
+    font-weight: 400;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'Inter';
+    src: url('/fonts/Inter-4.1/web/Inter-Bold.woff2') format('woff2');
+    font-weight: 700;
+    font-style: normal;
+}
+
 body {
   color: rgb(var(--foreground-rgb));
   background: linear-gradient(

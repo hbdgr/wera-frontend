@@ -7,7 +7,7 @@ import {
 
 export const config = getDefaultConfig({
   appName: "wera-frontend",
-  projectId: "WERA-FRONTEND-DAPP",
+  projectId: 'YOUR_PROJECT_ID',
   chains: [
     polygon,
     ...(process.env.NEXT_PUBLIC_ENABLE_TESTNETS === "true" ? [polygonAmoy] : []),
