@@ -47,7 +47,7 @@ export default function Home() {
 
       <div className="
         relative flex items-center justify-between
-        w-full lg:w-3/4 h-[500px] my-auto mt-14
+        w-full lg:w-2/4 h-[500px] my-auto mt-14
         shadow-inner bg-transparent border lg:rounded-xl border-wera-yellow/60
         b-test
       ">

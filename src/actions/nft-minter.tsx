@@ -53,6 +53,20 @@ export const isWhitelisted = async (
   return nftMinter.read.whitelist([account]) as Promise<boolean>;
 }
 
+export const isResident = async (
+  nftMinter: NFTMinter,
+  account: Address,
+): Promise<boolean> => {
+  const nftBalance = await nftMinter.read.balanceOf([account]) as bigint;
+  return nftBalance > 0;
+}
+
+export const baseURI = async (
+  nftMinter: NFTMinter,
+): Promise<string> => {
+  return nftMinter.read.getBaseURI() as Promise<string>;
+}
+
 // -- Get WETH --
 
 export const getWETH = (
