@@ -33,7 +33,7 @@ export default function Home() {
     <main className="
       flex flex-col min-h-screen items-center justify-between
       relative bg-cover bg-center
-      w-full lg:w-3/4 h-screen m-auto mb-96
+      w-full lg:w-3/4 h-screen m-auto
       shadow-inner bg-transparent border border-wera-yellow/10
       "
     >
@@ -47,9 +47,8 @@ export default function Home() {
 
       <div className="
         relative flex items-center justify-between
-        w-full lg:w-2/4 h-[500px] my-auto mt-14
+        w-full lg:min-w-[600px] lg:w-2/4 h-[500px] my-auto mt-20
         shadow-inner bg-transparent border lg:rounded-xl border-wera-yellow/60
-        b-test
       ">
 
         {isConnected && walletClient ? (
