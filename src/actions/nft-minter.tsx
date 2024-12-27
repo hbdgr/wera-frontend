@@ -28,6 +28,7 @@ export const getNftMinter = (walletClient: PublicClient): NFTMinter => getContra
 export const getNftPrice = async (
   nftMinter: NFTMinter,
 ): Promise<bigint> => {
+  // check if nftMinter is fine
   return nftMinter.read.nftPrice() as Promise<bigint>;
 };
 

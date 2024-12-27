@@ -2,7 +2,11 @@
 const nextConfig = {
   reactStrictMode: true,
   images: {
-    domains: ['i.ibb.co'], // Add your hostname here
+    remotePatterns: [
+    {
+      hostname: 'i.ibb.co',
+    },
+    ]
   },
   webpack: config => {
     config.externals.push('pino-pretty', 'lokijs', 'encoding')

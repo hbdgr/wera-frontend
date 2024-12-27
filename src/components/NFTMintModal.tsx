@@ -54,6 +54,8 @@ const Modal: React.FC<ModalProps> = ({ isOpen, onClose, walletClient, account })
     if (weth) return;
 
     const fetchWeth = async () => {
+      await new Promise((resolve) => setTimeout(resolve, 500));
+
       const address = await web3.getWETHAddress(nftMinter);
       setWethAddress(address);
 

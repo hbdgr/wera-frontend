@@ -2,6 +2,7 @@
 
 import React, { useEffect, useCallback } from "react";
 import { useAccount } from "wagmi";
+  const { isConnected, address, chain } = useAccount();
 import { createWalletClient, custom, publicActions, PublicClient } from "viem";
 
 import Header from "./header";
@@ -19,7 +20,6 @@ export default function Home() {
       }).extend(publicActions) as unknown as PublicClient
     : null;
 
-  console.log("isConnected", isConnected);
 
   const getNativeBalance = useCallback(async (): Promise<bigint> => {
     return walletClient!.getBalance({
@@ -28,15 +28,20 @@ export default function Home() {
   }, [walletClient, account]);
 
   useEffect(() => {
-    if (isConnected) {
-      getNativeBalance().then((balance) => {
+    const debugInfo = async () => {
+      await new Promise((resolve) => setTimeout(resolve, 500));
+
+      console.log("isConnected", isConnected);
+      if (isConnected) {
+        console.log("account", account);
         console.log("chain name", chain?.name);
         console.log("chain rpcs", JSON.stringify(chain?.rpcUrls));
 
-        console.log("account", account);
-        console.log("balance", balance);
-      });
+        console.log("balance", await getNativeBalance());
+      }
     }
+
+    debugInfo();
   }, [getNativeBalance]);
 
   return (

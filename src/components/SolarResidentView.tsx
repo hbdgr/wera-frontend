@@ -27,6 +27,7 @@ const SolarResidentView: React.FC<{ walletClient: PublicClient; account: `0x${st
   };
 
   useEffect(() => {
+
     const checkResident = async () => {
       const resident = await web3.isResident(nftMinter, account);
       console.log("resident?:", resident);
@@ -45,9 +46,20 @@ const SolarResidentView: React.FC<{ walletClient: PublicClient; account: `0x${st
       console.log("Base URI: ", uri);
     }
 
-    checkResident();
-    checkWhitelist();
-    getBaseURI();
+    // how to execute this with await?
+    const fetchData = async () => {
+      await new Promise((resolve) => setTimeout(resolve, 500));
+
+      try {
+        await checkResident();
+        await checkWhitelist();
+        await getBaseURI();
+      } catch (error) {
+        console.error("Error: ", error);
+      }
+    };
+
+    fetchData();
   }, [nftMinter]);
 
   return (
