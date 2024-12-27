@@ -16,6 +16,7 @@ const SolarResidentView: React.FC<{ walletClient: PublicClient; account: `0x${st
   const [baseURI, setBaseURI] = useState<string>("");
 
   const nftMinter: web3.NFTMinter = web3.getNftMinter(walletClient);
+  console.log("NFT Minter: ", nftMinter.address);
 
   const handleOpenModal = () => {
     setModalOpen(true);
@@ -28,11 +29,13 @@ const SolarResidentView: React.FC<{ walletClient: PublicClient; account: `0x${st
   useEffect(() => {
     const checkResident = async () => {
       const resident = await web3.isResident(nftMinter, account);
+      console.log("resident?:", resident);
       setIsResident(resident);
     }
 
     const checkWhitelist = async () => {
       const whitelisted = await web3.isWhitelisted(nftMinter, account);
+      console.log("whitelisted?:", whitelisted);
       setIsWhitelisted(whitelisted);
     }
 

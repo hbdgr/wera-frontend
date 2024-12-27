@@ -19,6 +19,8 @@ export default function Home() {
       }).extend(publicActions) as unknown as PublicClient
     : null;
 
+  console.log("isConnected", isConnected);
+
   const getNativeBalance = useCallback(async (): Promise<bigint> => {
     return walletClient!.getBalance({
       address: account,
@@ -26,7 +28,15 @@ export default function Home() {
   }, [walletClient, account]);
 
   useEffect(() => {
+    if (isConnected) {
+      getNativeBalance().then((balance) => {
+        console.log("chain name", chain?.name);
+        console.log("chain rpcs", JSON.stringify(chain?.rpcUrls));
 
+        console.log("account", account);
+        console.log("balance", balance);
+      });
+    }
   }, [getNativeBalance]);
 
   return (
