@@ -49,7 +49,7 @@ const MenuDropdown: FC<MenuDropdownProps> = ({ menuItems }) => {
                 onClick={toggle}
               >
                 {item.title}
-              </Link>
+              </Link>,
             )
           }
         </div>
