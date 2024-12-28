@@ -2,6 +2,7 @@ import { Address, PublicClient, formatEther, getContract, GetContractReturnType 
 
 import NFTMinterArt from "../artifacts/NFTMinter.json";
 import IERC20Art from "../artifacts/IERC20.json";
+import { debugLog } from "../log";
 
 export type SolidityBytes = `0x${string}`;
 export type NFTMinter = GetContractReturnType<typeof NFTMinterArt.abi, PublicClient>;
@@ -43,16 +44,16 @@ export const purchaseNFT = async (
 ): Promise<SolidityBytes> => {
   const hash = await nftMinter.write.purchaseNft();
 
-  console.log("purchase NFT: ", hash);
+  debugLog("purchase NFT: ", hash);
   return hash;
-}
+};
 
 export const isWhitelisted = async (
   nftMinter: NFTMinter,
   account: Address,
 ): Promise<boolean> => {
   return nftMinter.read.whitelist([account]) as Promise<boolean>;
-}
+};
 
 export const isResident = async (
   nftMinter: NFTMinter,
@@ -60,13 +61,13 @@ export const isResident = async (
 ): Promise<boolean> => {
   const nftBalance = await nftMinter.read.balanceOf([account]) as bigint;
   return nftBalance > 0;
-}
+};
 
 export const baseURI = async (
   nftMinter: NFTMinter,
 ): Promise<string> => {
   return nftMinter.read.getBaseURI() as Promise<string>;
-}
+};
 
 // -- Get WETH --
 
@@ -84,7 +85,7 @@ export const getWETHBalance = async (
   user: Address,
 ): Promise<bigint> => {
   return weth.read.balanceOf([user]) as Promise<bigint>;
-}
+};
 
 export const getWETHAllowance = async (
   weth: IERC20,
@@ -92,7 +93,7 @@ export const getWETHAllowance = async (
   spender: Address,
 ): Promise<bigint> => {
   return weth.read.allowance([owner, spender]) as Promise<bigint>;
-}
+};
 
 export const approveWETH = async (
   weth: IERC20,
@@ -101,6 +102,6 @@ export const approveWETH = async (
 ): Promise<SolidityBytes> => {
   const hash = await weth.write.approve([spender, amount]);
 
-  console.log("approve WETH: ", hash);
+  debugLog("approve WETH: ", hash);
   return hash;
-}
+};

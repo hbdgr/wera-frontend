@@ -5,6 +5,7 @@ import NFTMintModal from "./NFTMintModal";
 import { PublicClient } from "viem";
 
 import * as web3 from "../actions/nft-minter";
+import { debugLog } from "../log";
 
 const SolarResidentView: React.FC<{ walletClient: PublicClient; account: `0x${string}` }> = ({
   walletClient,
@@ -16,7 +17,7 @@ const SolarResidentView: React.FC<{ walletClient: PublicClient; account: `0x${st
   const [baseURI, setBaseURI] = useState<string>("");
 
   const nftMinter: web3.NFTMinter = web3.getNftMinter(walletClient);
-  console.log("NFT Minter: ", nftMinter.address);
+  debugLog("NFT Minter: ", nftMinter.address);
 
   const handleOpenModal = () => {
     setModalOpen(true);
@@ -30,21 +31,21 @@ const SolarResidentView: React.FC<{ walletClient: PublicClient; account: `0x${st
 
     const checkResident = async () => {
       const resident = await web3.isResident(nftMinter, account);
-      console.log("resident?:", resident);
+      debugLog("resident?:", resident);
       setIsResident(resident);
-    }
+    };
 
     const checkWhitelist = async () => {
       const whitelisted = await web3.isWhitelisted(nftMinter, account);
-      console.log("whitelisted?:", whitelisted);
+      debugLog("whitelisted?:", whitelisted);
       setIsWhitelisted(whitelisted);
-    }
+    };
 
     const getBaseURI = async () => {
       const uri = await web3.baseURI(nftMinter);
       setBaseURI(uri);
-      console.log("Base URI: ", uri);
-    }
+      debugLog("Base URI: ", uri);
+    };
 
     // how to execute this with await?
     const fetchData = async () => {
@@ -60,7 +61,7 @@ const SolarResidentView: React.FC<{ walletClient: PublicClient; account: `0x${st
     };
 
     fetchData();
-  }, [nftMinter]);
+  }, [account, nftMinter]);
 
   return (
     <div className="flex w-full">

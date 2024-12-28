@@ -2,11 +2,11 @@
 
 import React, { useEffect, useCallback } from "react";
 import { useAccount } from "wagmi";
-  const { isConnected, address, chain } = useAccount();
 import { createWalletClient, custom, publicActions, PublicClient } from "viem";
 
 import Header from "./header";
 import SolarResidentView from "../components/SolarResidentView";
+import { debugLog } from "../log";
 
 export default function Home() {
   const { isConnected, address, chain } = useAccount();
@@ -31,18 +31,18 @@ export default function Home() {
     const debugInfo = async () => {
       await new Promise((resolve) => setTimeout(resolve, 500));
 
-      console.log("isConnected", isConnected);
+      debugLog("isConnected", isConnected);
       if (isConnected) {
-        console.log("account", account);
-        console.log("chain name", chain?.name);
-        console.log("chain rpcs", JSON.stringify(chain?.rpcUrls));
+        debugLog("account", account);
+        debugLog("chain name", chain?.name);
+        debugLog("chain rpcs", JSON.stringify(chain?.rpcUrls));
 
-        console.log("balance", await getNativeBalance());
+        debugLog("balance", await getNativeBalance());
       }
-    }
+    };
 
     debugInfo();
-  }, [getNativeBalance]);
+  }, [account, chain, isConnected, getNativeBalance]);
 
   return (
     <main className="
@@ -52,7 +52,6 @@ export default function Home() {
       shadow-inner bg-transparent border border-wera-yellow/10
       "
     >
-
       <Header />
 
       <div className="
@@ -78,7 +77,6 @@ export default function Home() {
         )}
 
       </div>
-
     </main>
   );
 }

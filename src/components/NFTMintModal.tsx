@@ -4,6 +4,7 @@ import { Address, PublicClient } from "viem";
 import { FaTimes } from "react-icons/fa";
 
 import * as web3 from "../actions/nft-minter";
+import { debugLog } from "../log";
 
 interface ModalProps {
   isOpen: boolean;
@@ -34,7 +35,7 @@ const Modal: React.FC<ModalProps> = ({ isOpen, onClose, walletClient, account })
       console.log("Transaction confirmed");
       await updateWethAllowance(weth!);
     } else {
-      console.log("Transaction failed");
+      console.error("Transaction failed");
     }
   };
 
@@ -43,8 +44,8 @@ const Modal: React.FC<ModalProps> = ({ isOpen, onClose, walletClient, account })
   const updateWethAllowance = useCallback(async (weth: web3.IERC20) => {
     const allowance = await web3.getWETHAllowance(weth, account, nftMinter.address);
     setWethAllowance(allowance);
-    console.log("WETH Allowance: ", allowance);
-  }, [setWethAllowance]);
+    debugLog("WETH Allowance: ", allowance);
+  }, [account, nftMinter, setWethAllowance]);
 
   const updateNftPrice = useCallback(async () => {
     setNftPrice(await web3.getNftPrice(nftMinter));
@@ -76,7 +77,7 @@ const Modal: React.FC<ModalProps> = ({ isOpen, onClose, walletClient, account })
 
   const canApprove = () => {
     return wethAllowance < nftPrice;
-  }
+  };
 
   const canMint = () => {
     return wethAllowance >= nftPrice;
